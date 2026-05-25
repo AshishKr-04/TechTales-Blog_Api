@@ -15,7 +15,7 @@ TechTales is a **full-stack, production-grade blogging platform** built to demon
 
 ![TechTales Dashboard](assets/techtales_dashboard.png)
 
-> 🔗 **Live Demo Link**: [https://techtales-api.herokuapp.com](https://techtales-api.herokuapp.com) *(Placeholder - swap with your live URL when deployed to Railway/Render/AWS)*
+> 🔗 **Live Demo Link**: [https://techtales-6eij.onrender.com](https://techtales-6eij.onrender.com)
 
 ---
 
