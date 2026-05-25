@@ -1,0 +1,50 @@
+# Maven Build Target Exclusions
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+build.log
+clean.log
+
+# IDE & Editor Specific Exclusions
+# VS Code
+.vscode/
+*.code-workspace
+.history/
+
+# IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+
+# Eclipse
+.metadata/
+.classpath
+.project
+.settings/
+*.tmp
+*.bak
+
+# Log Files
+*.log
+logs/
+
+# OS / System Cache Exclusions
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Temporary Database / Local Configs
+*.sql
+*.db
+.env
+.env.local

@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechTales | Premium Blogging Platform</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Premium Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Glowing Background Orbs for Ambient Lighting -->
+    <div class="glow-orb orb-1"></div>
+    <div class="glow-orb orb-2"></div>
+
+    <!-- Header / Navigation Bar -->
+    <header class="main-header">
+        <div class="nav-container">
+            <a href="#" class="brand" id="brand-logo">
+                <span class="logo-accent"><i class="fa-solid fa-feather-pointed"></i></span>
+                TechTales
+            </a>
+            
+            <nav class="main-nav">
+                <!-- Guest Navigation -->
+                <div class="nav-group" id="nav-guest">
+                    <button class="btn btn-secondary btn-sm" id="btn-show-login"><i class="fa-solid fa-right-to-bracket"></i> Login</button>
+                    <button class="btn btn-primary btn-sm" id="btn-show-register"><i class="fa-solid fa-user-plus"></i> Sign Up</button>
+                </div>
+                <!-- Logged In Navigation -->
+                <div class="nav-group" id="nav-user" style="display: none;">
+                    <button class="btn btn-accent btn-sm" id="btn-create-post"><i class="fa-solid fa-plus"></i> New Post</button>
+                    <button class="btn btn-ghost btn-sm" id="btn-my-profile"><i class="fa-solid fa-circle-user"></i> <span id="nav-username">Profile</span></button>
+                    <button class="btn btn-ghost btn-sm" id="btn-logout"><i class="fa-solid fa-power-off"></i> Logout</button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="container">
+        
+        <!-- ================= FEED VIEW ================= -->
+        <section id="view-feed" class="view-section active">
+            <!-- Hero banner section -->
+            <div class="hero-section">
+                <h1 class="hero-title">Discover thoughts, ideas, and stories.</h1>
+                <p class="hero-subtitle">A minimal, high-end platform for sharing knowledge across tech, design, and software development.</p>
+                
+                <!-- Search & Filters Container -->
+                <div class="search-filter-box">
+                    <div class="search-input-wrapper">
+                        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                        <input type="text" id="search-input" placeholder="Search articles by title, content...">
+                        <button class="btn btn-primary" id="btn-search">Search</button>
+                    </div>
+                    
+                    <div class="filters-row">
+                        <!-- Category Quick Pills -->
+                        <div class="category-pills" id="category-pills-list">
+                            <span class="pill active" data-category="">All</span>
+                            <span class="pill" data-category="Tech">Tech</span>
+                            <span class="pill" data-category="Programming">Programming</span>
+                            <span class="pill" data-category="Design">Design</span>
+                            <span class="pill" data-category="Tutorial">Tutorial</span>
+                        </div>
+                        <input type="text" id="tag-filter-input" placeholder="Filter by #tag" class="tag-input-sm">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feed Content -->
+            <div class="feed-header">
+                <h2>Recent Publications</h2>
+                <div class="feed-meta" id="feed-results-count">Showing all posts</div>
+            </div>
+
+            <!-- Blog Grid -->
+            <div class="blogs-grid" id="blogs-grid-container">
+                <!-- Blog cards dynamically loaded here -->
+                <div class="loading-state">
+                    <i class="fa-solid fa-spinner fa-spin loading-spinner"></i>
+                    <p>Fetching beautiful stories...</p>
+                </div>
+            </div>
+
+            <!-- Pagination Controls -->
+            <div class="pagination-container" id="pagination-controls" style="display: none;">
+                <button class="btn btn-secondary btn-sm" id="btn-prev-page" disabled><i class="fa-solid fa-chevron-left"></i> Previous</button>
+                <span class="page-indicator" id="page-number-indicator">Page 1 of 1</span>
+                <button class="btn btn-secondary btn-sm" id="btn-next-page" disabled>Next <i class="fa-solid fa-chevron-right"></i></button>
+            </div>
+        </section>
+
+        <!-- ================= READ ARTICLE VIEW ================= -->
+        <section id="view-article" class="view-section">
+            <button class="btn btn-ghost btn-back" id="btn-back-to-feed"><i class="fa-solid fa-arrow-left-long"></i> Back to feed</button>
+            
+            <article class="article-details-card" id="article-details-container">
+                <!-- Dynamically loaded full blog details -->
+            </article>
+
+            <!-- Comments Section -->
+            <div class="comments-section-container">
+                <div class="comments-header">
+                    <h3>Comments (<span id="comments-count">0</span>)</h3>
+                </div>
+
+                <!-- Add Comment Form (Only shown if logged in) -->
+                <div class="comment-form-wrapper" id="comment-form-authenticated" style="display: none;">
+                    <div class="comment-author-avatar" id="comment-user-avatar">?</div>
+                    <form id="comment-submit-form" class="comment-form">
+                        <textarea id="comment-textarea" placeholder="Join the discussion... Type something insightful." required></textarea>
+                        <div class="comment-form-actions">
+                            <button type="submit" class="btn btn-primary btn-sm"><i class="fa-solid fa-paper-plane"></i> Post Comment</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="comment-form-wrapper guest-prompt-box" id="comment-form-guest">
+                    <p><i class="fa-regular fa-comment-dots"></i> You must be <a href="#" id="link-comment-login">logged in</a> to write comments.</p>
+                </div>
+
+                <!-- Comments List -->
+                <div class="comments-list" id="comments-list-container">
+                    <!-- Comments dynamically loaded here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= CREATE/EDIT VIEW (SPLIT-SCREEN WRITER) ================= -->
+        <section id="view-writer" class="view-section">
+            <div class="section-header">
+                <h2 id="writer-view-title"><i class="fa-solid fa-pen-nib"></i> Write new publication</h2>
+                <button class="btn btn-ghost" id="btn-cancel-write"><i class="fa-solid fa-xmark"></i> Cancel</button>
+            </div>
+
+            <div class="writer-split-container">
+                <!-- Editor Panel (Left) -->
+                <div class="writer-editor-panel glass-card">
+                    <form id="blog-editor-form">
+                        <input type="hidden" id="edit-blog-id" value="">
+                        
+                        <div class="form-group">
+                            <label for="blog-title">Title</label>
+                            <input type="text" id="blog-title" placeholder="A catchy, descriptive title" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="blog-summary">Summary</label>
+                            <input type="text" id="blog-summary" placeholder="A brief one-sentence hook showing in feed" required>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="blog-category">Category</label>
+                                <input type="text" id="blog-category" placeholder="Tech, Design, Tutorial..." required>
+                            </div>
+                            <div class="form-group">
+                                <label for="blog-tags">Tags (comma separated)</label>
+                                <input type="text" id="blog-tags" placeholder="java, webdev, database">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="blog-content">Body Content (Supports standard text/HTML)</label>
+                            <textarea id="blog-content" placeholder="Share your knowledge here. Tell a story!" required></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-block" id="btn-submit-post">Publish Story</button>
+                    </form>
+                </div>
+
+                <!-- Live Preview Panel (Right) -->
+                <div class="writer-preview-panel glass-card">
+                    <div class="preview-header">
+                        <span><i class="fa-regular fa-eye"></i> Live Reader View Preview</span>
+                    </div>
+                    <div class="preview-content" id="blog-live-preview">
+                        <h1 class="preview-title" id="prev-title">Your Publication Title</h1>
+                        <div class="preview-meta">
+                            <span class="preview-badge" id="prev-category">General</span>
+                            <span class="preview-author"><i class="fa-solid fa-user-circle"></i> Draft Author</span>
+                        </div>
+                        <p class="preview-summary" id="prev-summary">Your publication summary hook will appear here.</p>
+                        <div class="preview-body" id="prev-body">Start writing to see your story take shape...</div>
+                        <div class="preview-tags" id="prev-tags">
+                            <!-- Tags preview -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= PROFILE VIEW ================= -->
+        <section id="view-profile" class="view-section">
+            <div class="profile-header-card glass-card">
+                <div class="profile-avatar-circle" id="profile-avatar">U</div>
+                <div class="profile-details">
+                    <h2 id="profile-username">User Name</h2>
+                    <p id="profile-email">email@techtales.com</p>
+                    <span class="badge" id="profile-badge">ROLE_USER</span>
+                </div>
+                
+                <!-- Relational statistics metrics -->
+                <div class="profile-stats">
+                    <div class="stat-box">
+                        <span class="stat-num" id="profile-stat-posts">0</span>
+                        <span class="stat-lbl">Publications</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-num" id="profile-stat-likes">0</span>
+                        <span class="stat-lbl">Likes Received</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="profile-feed-container">
+                <h3>My Publications</h3>
+                <div class="blogs-grid" id="profile-blogs-grid">
+                    <!-- Profile posts loaded dynamically -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ================= AUTH MODALS SYSTEM ================= -->
+    <!-- Modal Backdrop -->
+    <div class="modal-backdrop" id="modal-backdrop"></div>
+
+    <!-- Login Modal -->
+    <div class="modal glass-card" id="modal-login">
+        <div class="modal-header">
+            <h3>Welcome Back</h3>
+            <button class="modal-close" id="btn-close-login"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="modal-body">
+            <div class="auth-error-message" id="login-error" style="display: none;">Invalid username or password.</div>
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="login-username">Username</label>
+                    <div class="input-icon-wrapper">
+                        <i class="fa-regular fa-user"></i>
+                        <input type="text" id="login-username" placeholder="Type username" required autocomplete="username">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Password</label>
+                    <div class="input-icon-wrapper">
+                        <i class="fa-solid fa-lock"></i>
+                        <input type="password" id="login-password" placeholder="Type password" required autocomplete="current-password">
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+            </form>
+            <p class="auth-footer-prompt">Don't have an account? <a href="#" id="link-show-register">Sign up free</a></p>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div class="modal glass-card" id="modal-register">
+        <div class="modal-header">
+            <h3>Create Account</h3>
+            <button class="modal-close" id="btn-close-register"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="modal-body">
+            <div class="auth-error-message" id="register-error" style="display: none;">Username or email already exists.</div>
+            <form id="register-form">
+                <div class="form-group">
+                    <label for="reg-username">Username</label>
+                    <div class="input-icon-wrapper">
+                        <i class="fa-regular fa-user"></i>
+                        <input type="text" id="reg-username" placeholder="Type username" required autocomplete="username">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="reg-email">Email Address</label>
+                    <div class="input-icon-wrapper">
+                        <i class="fa-regular fa-envelope"></i>
+                        <input type="email" id="reg-email" placeholder="example@email.com" required autocomplete="email">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="reg-password">Password</label>
+                    <div class="input-icon-wrapper">
+                        <i class="fa-solid fa-lock"></i>
+                        <input type="password" id="reg-password" placeholder="At least 6 characters" required autocomplete="new-password">
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Create Account</button>
+            </form>
+            <p class="auth-footer-prompt">Already have an account? <a href="#" id="link-show-login">Sign in</a></p>
+        </div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div class="toast-notification" id="toast-notify">
+        <span class="toast-message" id="toast-message">Success message!</span>
+    </div>
+
+    <!-- Custom App Javascript -->
+    <script src="app.js"></script>
+</body>
+</html>
